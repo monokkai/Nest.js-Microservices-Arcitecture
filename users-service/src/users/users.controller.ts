@@ -19,11 +19,11 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) { }
 
     @Get('searchall')
-    @ApiOperation({ summary: 'Получение списка пользователей' })
-    @ApiResponse({ status: 200, description: 'Список успешно получен.', type: Array<User> })
-    @ApiResponse({ status: 404, description: 'Пользователи не найдены.' })
+    @ApiOperation({ summary: 'Getting the users list' })
+    @ApiResponse({ status: 200, description: 'Users list successfully received.', type: Array<User> })
+    @ApiResponse({ status: 404, description: 'Users not found.' })
     public readAll(): Promise<Array<User>> {
-        console.log('users-service tests aaaaaaaaaaaa');
+        console.log('users-service');
         return this.usersService.readAll();
     }
 

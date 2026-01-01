@@ -6,8 +6,6 @@ import { Request } from "express"
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) { }
-  //на порт 3000 все идут запросы
-  //Коммитыsss
   @All(["/users", "/users/*"])
   public async apiRequestToClearUsers(@Req() request: Request, @Body() body: any): Promise<any> {
     console.log("users")
@@ -37,7 +35,7 @@ export class AppController {
     console.log("reviews")
     return this.appService.apiRequestToReviews(request, body);
   }
-  
+
   @All(["/auth", "/auth/*"])
   public async apiRequestToSecurity(@Req() request: Request, @Body() body: any): Promise<any> {
     console.log("security")
