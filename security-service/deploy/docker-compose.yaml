@@ -1,0 +1,20 @@
+services:
+  security-mongodb:
+    image: mongo:7
+    volumes:
+      - security-db-data:/data/db
+
+  security-service:
+    build:
+      context: ..
+    ports:
+      - "3006:3000"
+    depends_on:
+      - security-mongodb
+    environment:
+      MONGODB_URI: mongodb://security-mongodb:27017/security
+      JWT_SECRET: your_secure_jwt_secret_key
+      JWT_REFRESH_SECRET: your_secure_refresh_secret_key
+
+volumes:
+  security-db-data:

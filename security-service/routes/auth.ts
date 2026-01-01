@@ -19,7 +19,7 @@ router.get('/profile', authenticateJWT, (req: Request, res: Response) => {
 router.post('/verify-role', verifyRole);
 
 router.get('/protected', authenticateJWT, (req: Request, res: Response) => {
-    res.json({ message: 'Welcome to the protected route!', user: req.user });
+  res.json({ message: 'Welcome to the protected route!', user: req.user });
 });
 
 export default router;

@@ -1,0 +1,33 @@
+services:
+  products-mariadb:
+    image: mariadb:11
+    environment:
+      MARIADB_ROOT_PASSWORD: 6-L2fPxG
+      MARIADB_DATABASE: productsdb
+      MARIADB_USER: productsService
+      MARIADB_PASSWORD: 00nE_QmO
+    volumes:
+      - products-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  products-service:
+    build:
+      context: ..
+    ports:
+      - "3002:3000"
+    depends_on:
+      products-mariadb:
+        condition: service_healthy
+    environment:
+      DATABASE_HOST: products-mariadb
+      DATABASE_PORT: 3306
+      DATABASE_USER: productsService
+      DATABASE_PASSWORD: 00nE_QmO
+      DATABASE_NAME: productsdb
+
+volumes:
+  products-db-data:

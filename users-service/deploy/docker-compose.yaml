@@ -1,0 +1,33 @@
+services:
+  users-mariadb:
+    image: mariadb:11
+    environment:
+      MARIADB_ROOT_PASSWORD: oWhB9-HW
+      MARIADB_DATABASE: usersdb
+      MARIADB_USER: usersService
+      MARIADB_PASSWORD: glf-Jj6A
+    volumes:
+      - users-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  users-service:
+    build:
+      context: ..
+    ports:
+      - "3001:3000"
+    depends_on:
+      users-mariadb:
+        condition: service_healthy
+    environment:
+      DATABASE_HOST: users-mariadb
+      DATABASE_PORT: 3306
+      DATABASE_USER: usersService
+      DATABASE_PASSWORD: glf-Jj6A
+      DATABASE_NAME: usersdb
+
+volumes:
+  users-db-data:

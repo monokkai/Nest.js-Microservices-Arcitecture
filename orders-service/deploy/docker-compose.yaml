@@ -1,0 +1,18 @@
+services:
+  orders-mongodb:
+    image: mongo:7
+    volumes:
+      - orders-db-data:/data/db
+
+  orders-service:
+    build:
+      context: ..
+    ports:
+      - "3003:3000"
+    depends_on:
+      - orders-mongodb
+    environment:
+      MONGODB_URI: mongodb://orders-mongodb:27017/orders
+
+volumes:
+  orders-db-data:

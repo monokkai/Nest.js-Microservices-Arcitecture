@@ -1,6 +1,6 @@
 services:
-  chat-service:
+  api-gateway-service:
     build:
       context: ..
     ports:
-      - "3004:3000"
+      - "3000:3000"

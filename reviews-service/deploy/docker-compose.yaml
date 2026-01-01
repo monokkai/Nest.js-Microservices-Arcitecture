@@ -1,0 +1,18 @@
+services:
+  reviews-mongodb:
+    image: mongo:7
+    volumes:
+      - reviews-db-data:/data/db
+
+  reviews-service:
+    build:
+      context: ..
+    ports:
+      - "3005:3000"
+    depends_on:
+      - reviews-mongodb
+    environment:
+      MONGODB_URI: mongodb://reviews-mongodb:27017/reviews
+
+volumes:
+  reviews-db-data:
