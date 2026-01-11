@@ -39,7 +39,7 @@ A powerful e-commerce platform built with NestJS, Docker, and modern technologie
 
 ## 📁 Project Structure
 ```
-├── api-gateway-service    # API Gateway connecting all services
+├── api-gateway-service   # API Gateway connecting all services
 ├── chat-service          # Real-time chat functionality
 ├── orders-service        # Order management
 ├── products-service      # Product catalog management
